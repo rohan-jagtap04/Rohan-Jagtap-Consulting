@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 interface Product {
   id: number
   name: string
@@ -6,13 +8,19 @@ interface Product {
   image: string
 }
 
-interface ProductCardProps {
-  product: Product
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow flex flex-col">
+    <motion.div
+      variants={cardVariants}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="bg-white rounded-lg shadow hover:shadow-md transition-shadow flex flex-col"
+    >
       <img
         src={product.image}
         alt={product.name}
@@ -23,6 +31,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className="text-sm text-gray-500 mt-2">Category: {product.category}</p>
         <p className="text-indigo-600 font-semibold mt-4">${product.price}</p>
       </div>
-    </div>
-  );
+    </motion.div>
+  )
 }

@@ -1,14 +1,15 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import ProductCard from "./ProductCard";
+import { useState } from 'react'
+import ProductCard from './ProductCard'
+import { motion } from 'framer-motion'
 
 interface Product {
-	id: number;
-	name: string;
-	category: string;
-	price: number;
-	image: string;
+  id: number
+  name: string
+  category: string
+  price: number
+  image: string
 }
 
 const allProducts: Product[] = [
@@ -50,53 +51,66 @@ const allProducts: Product[] = [
 	// Add more products as needed
 ];
 
-const categories = [
-	"All",
-	"Home Decor",
-	"Accessories",
-	"Clothing",
-	"Electronics",
-];
+const categories = ['All', 'Home Decor', 'Accessories', 'Clothing', 'Electronics']
+
+// Animation Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      // Stagger each product card by 0.1s
+      staggerChildren: 0.1,
+    },
+  },
+}
 
 export default function ProductsPage() {
-	const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
-	const filteredProducts =
-		selectedCategory === "All"
-			? allProducts
-			: allProducts.filter((p) => p.category === selectedCategory);
+  const filteredProducts =
+    selectedCategory === 'All'
+      ? allProducts
+      : allProducts.filter((p) => p.category === selectedCategory)
 
-	return (
-		<section className="py-8 space-y-6">
-			<h1 className="text-3xl font-bold text-gray-800 text-center mb-4">
-				Our Products
-			</h1>
+  return (
+    <section className="py-8 space-y-6">
+      <h1 className="text-3xl font-bold text-gray-800 text-center mb-4">
+        Our Products
+      </h1>
 
-			{/* Category Filter */}
-			<div className="flex justify-center space-x-4 mb-6">
-				{categories.map((cat) => (
-					<button
-						key={cat}
-						onClick={() => setSelectedCategory(cat)}
-						className={`px-4 py-2 rounded-full border 
+      {/* Category Filter */}
+      <div className="flex justify-center space-x-4 mb-6">
+        {categories.map((cat) => (
+          <motion.button
+            key={cat}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setSelectedCategory(cat)}
+            className={`px-4 py-2 rounded-full border 
               ${
-								selectedCategory === cat
-									? "bg-indigo-600 text-white border-indigo-600"
-									: "bg-white text-gray-600 border-gray-300 hover:bg-gray-100"
-							}
+                selectedCategory === cat
+                  ? 'bg-indigo-600 text-white border-indigo-600'
+                  : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-100'
+              }
               transition-colors`}
-					>
-						{cat}
-					</button>
-				))}
-			</div>
+          >
+            {cat}
+          </motion.button>
+        ))}
+      </div>
 
-			{/* Products Grid */}
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-				{filteredProducts.map((product) => (
-					<ProductCard product={product} key={product.id} />
-				))}
-			</div>
-		</section>
-	);
+      {/* Products Grid with staggered children */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
+        {filteredProducts.map((product) => (
+          <ProductCard product={product} key={product.id} />
+        ))}
+      </motion.div>
+    </section>
+  )
 }
