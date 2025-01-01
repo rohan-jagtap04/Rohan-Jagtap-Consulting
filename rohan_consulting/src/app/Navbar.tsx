@@ -1,108 +1,106 @@
-// src/app/components/Navbar.tsx
+// app/components/Navbar.tsx
 'use client'
 
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useState } from 'react'
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi'
-import { motion } from 'framer-motion'
-import { useTheme } from 'next-themes'
+import { FiMenu, FiX } from 'react-icons/fi'
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
-
-  // We can check whether we’re in dark mode or not
-  const isDark = theme === 'dark'
+  const [open, setOpen] = useState(false)
 
   return (
-    <motion.nav
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 shadow"
-    >
-      {/* Left: Brand Name */}
-      <Link
-        href="/"
-        className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent"
+    <div className="fixed top-4 inset-x-0 z-50 flex justify-center">
+      <motion.nav
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="
+          bg-white dark:bg-neutral-900 
+          bg-opacity-70 dark:bg-opacity-70 
+          backdrop-blur-lg 
+          shadow-sm rounded-full 
+          flex items-center justify-between 
+          w-[95%] max-w-5xl px-6 py-3
+        "
       >
-        MyShop
-      </Link>
+        {/* Left Brand */}
+        <Link href="/" className="font-semibold text-lg tracking-wide">
+          augen
+        </Link>
 
-      {/* Right: Desktop Menu + Theme Toggle */}
-      <div className="hidden md:flex items-center space-x-6">
-        <AnimatedNavLink href="/">Home</AnimatedNavLink>
-        <AnimatedNavLink href="/products">Products</AnimatedNavLink>
-        <AnimatedNavLink href="/contact">Contact</AnimatedNavLink>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <li>
+            <Link href="/programs" className="hover:text-gray-600 dark:hover:text-gray-300">
+              Programs
+            </Link>
+          </li>
+          <li>
+            <Link href="/updates" className="hover:text-gray-600 dark:hover:text-gray-300">
+              Updates
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className="hover:text-gray-600 dark:hover:text-gray-300">
+              About
+            </Link>
+          </li>
+        </ul>
 
-        {/* Theme Toggle Icon */}
+        {/* Mobile Toggle */}
         <button
-          onClick={() => setTheme(isDark ? 'light' : 'dark')}
-          className="text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          className="md:hidden p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10"
+          onClick={() => setOpen(!open)}
         >
-          {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
+          {open ? <FiX size={20} /> : <FiMenu size={20} />}
         </button>
-      </div>
 
-      {/* Hamburger (mobile) */}
-      <button
-        className="md:hidden text-gray-600 dark:text-gray-300"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-      </button>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0 }}
-          animate={{ height: 'auto' }}
-          transition={{ duration: 0.3 }}
-          className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700"
-        >
-          <div className="flex flex-col space-y-2 px-4 py-3">
-            <AnimatedNavLink href="/" onClick={() => setIsOpen(false)}>
-              Home
-            </AnimatedNavLink>
-            <AnimatedNavLink href="/products" onClick={() => setIsOpen(false)}>
-              Products
-            </AnimatedNavLink>
-            <AnimatedNavLink href="/contact" onClick={() => setIsOpen(false)}>
-              Contact
-            </AnimatedNavLink>
-
-            {/* Mobile Theme Toggle */}
-            <button
-              onClick={() => {
-                setTheme(isDark ? 'light' : 'dark')
-                setIsOpen(false)
-              }}
-              className="flex items-center text-gray-600 dark:text-gray-300 p-2 space-x-2 transition-colors"
+        {/* Mobile Dropdown */}
+        {open && (
+          <motion.div
+            initial={{ height: 0 }}
+            animate={{ height: 'auto' }}
+            transition={{ duration: 0.3 }}
+            className="
+              absolute top-full left-0 w-full 
+              mt-2
+            "
+          >
+            <div
+              className="
+                mx-auto w-[95%] max-w-5xl 
+                bg-white dark:bg-neutral-900 
+                rounded-xl shadow-lg 
+                flex flex-col space-y-2
+                py-4 px-6
+              "
             >
-              {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
-              <span>Toggle Theme</span>
-            </button>
-          </div>
-        </motion.div>
-      )}
-    </motion.nav>
-  )
-}
-
-function AnimatedNavLink({
-  href,
-  children,
-  onClick,
-}: {
-  href: string
-  children: React.ReactNode
-  onClick?: () => void
-}) {
-  return (
-    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-      <Link href={href} onClick={onClick}>
-        {children}
-      </Link>
-    </motion.div>
+              <Link
+                href="/programs"
+                className="py-2 hover:text-gray-600 dark:hover:text-gray-300"
+                onClick={() => setOpen(false)}
+              >
+                Programs
+              </Link>
+              <Link
+                href="/updates"
+                className="py-2 hover:text-gray-600 dark:hover:text-gray-300"
+                onClick={() => setOpen(false)}
+              >
+                Updates
+              </Link>
+              <Link
+                href="/about"
+                className="py-2 hover:text-gray-600 dark:hover:text-gray-300"
+                onClick={() => setOpen(false)}
+              >
+                About
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </motion.nav>
+    </div>
   )
 }

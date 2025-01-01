@@ -1,154 +1,118 @@
+// app/page.tsx
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <div className="space-y-16">
-      {/* 1. PARALLAX HERO SECTION */}
-      <section
-        className="
-          relative h-screen w-full 
-          bg-cover bg-center bg-fixed
-          flex items-center justify-center
-          text-white
-        "
-        // Replace the URL below with your own image.
-        style={{
-          backgroundImage: "url('/images/parallax-bg.jpg')",
-        }}
-      >
-        {/* Overlay to darken the background image */}
-        <div className="absolute inset-0 bg-black/40" />
-
-        <motion.div
-          className="relative z-10 text-center px-4"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-5xl md:text-6xl font-extrabold drop-shadow-lg">
-            Parallax Hero
-          </h1>
-          <p className="mt-4 text-lg max-w-xl mx-auto drop-shadow">
-            Experience a stunning parallax effect as you scroll.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* 2. BACKGROUND VIDEO WITH TEXT OVERLAY (SCROLLYTELLING) */}
-      <section className="relative w-full h-screen overflow-hidden">
-        {/* Background video filling the entire section */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          // Replace the URL below with your own video.
-          src="/videos/background-video.mp4"
-        />
-
-        {/* A semi-transparent overlay if desired */}
-        <div className="absolute inset-0 bg-purple-900/20" />
-
-        {/* Foreground content */}
-        <div
-          className="
-            relative z-10 
-            flex flex-col items-center justify-center 
-            h-full text-center text-white px-4
-          "
-        >
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-xl"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            Scroll Over Our Epic Video
-          </motion.h2>
-          <motion.p
-            className="max-w-lg text-xl drop-shadow"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            This text floats over a background video, creating a scrollytelling
-            effect.
-          </motion.p>
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <section className="relative flex flex-col justify-center min-h-screen bg-white dark:bg-neutral-900">
+        <div className="absolute inset-0 z-0 pointer-events-none select-none">
+          {/* Large fade or silhouette image if you want */}
+          {/* <Image ... /> */}
         </div>
-      </section>
 
-      {/* 3. HORIZONTALLY SCROLLED SECTION */}
-      <section className="py-16">
-        <motion.h3
-          className="text-3xl md:text-4xl font-extrabold text-center mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          Horizontal Scroll Gallery
-        </motion.h3>
+        <div className="relative z-10 px-6 md:px-12 max-w-4xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-5xl md:text-7xl font-bold leading-[1.2] mb-4"
+          >
+            Enhancement<br />of human experience
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-xl mb-8"
+          >
+            Explore cutting-edge wearable &amp; neural technologies designed for
+            the intelligence age.
+          </motion.p>
 
-        <div className="w-full overflow-x-auto">
-          <div className="flex space-x-4 min-w-max px-4">
-            {/* Sample items to demonstrate horizontal scrolling */}
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="
-                  w-64 h-64 
-                  flex-shrink-0 
-                  bg-gradient-to-r from-purple-500 to-pink-500 
-                  flex items-center justify-center 
-                  text-white text-2xl 
-                  font-bold 
-                  rounded-lg 
-                  shadow-lg
-                "
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                viewport={{ once: true }}
-              >
-                Item {i + 1}
-              </motion.div>
-            ))}
+          <div className="flex space-x-3">
+            <Link
+              href="/programs"
+              className="inline-block px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition"
+            >
+              A&apos;Sense
+            </Link>
+            <Link
+              href="/programs"
+              className="inline-block px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition"
+            >
+              B&apos;Eye
+            </Link>
+            <Link
+              href="/programs"
+              className="inline-block px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition"
+            >
+              A&apos;Neuro
+            </Link>
+          </div>
+        </div>
+
+        {/* Scroll prompt */}
+        <div className="absolute bottom-6 w-full flex justify-center">
+          <div className="flex flex-col items-center text-gray-500 dark:text-gray-400 text-sm">
+            <span>Scroll</span>
+            <div className="w-[1px] h-6 bg-current animate-bounce mt-1" />
           </div>
         </div>
       </section>
 
-      {/* 4. ANIMATED TEXT SECTION */}
-      <section className="py-16 container mx-auto px-4 md:px-8">
-        <motion.h4
-          className="text-4xl font-extrabold text-center"
-          initial={{ opacity: 0, y: 50 }}
+      {/* 2. Overview Section (light grey) */}
+      <section className="bg-gray-50 dark:bg-neutral-800 py-16 px-6 md:px-12">
+        <motion.h2
+          className="text-2xl md:text-4xl font-semibold mb-6"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
           viewport={{ once: true }}
         >
-          Scrollytelling Animated Text
-        </motion.h4>
-
+          2.0 Putting People First
+        </motion.h2>
         <motion.p
-          className="max-w-xl mx-auto mt-6 text-center text-lg text-gray-700 dark:text-gray-200"
+          className="max-w-3xl text-gray-700 dark:text-gray-300 mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 1, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          This text fades in when it comes into the viewport, adding an engaging
-          storytelling aspect to your site.
+          Through the use of wearable technology, we aim to enhance human
+          capabilities and generate a positive impact on the world. This section
+          can replicate the “Putting People First” reference from Augen, with
+          big bold headings and plenty of negative space.
         </motion.p>
+        <Link href="#" className="text-blue-600 dark:text-blue-400 underline">
+          Career Options
+        </Link>
       </section>
 
-      {/*  (Optional) Additional sections below */}
+      {/* 3. Stay Updated (another block, referencing 3.0) */}
+      <section className="bg-white dark:bg-neutral-900 py-16 px-6 md:px-12">
+        <motion.h2
+          className="text-2xl md:text-4xl font-semibold mb-6"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          3.0 Stay Updated
+        </motion.h2>
+        <p className="max-w-3xl text-gray-700 dark:text-gray-300 mb-10">
+          Stay updated with our latest technological innovations and
+          advancements in research and development. 
+        </p>
+        <Link href="/updates" className="text-blue-600 dark:text-blue-400 underline">
+          Latest News
+        </Link>
+      </section>
+
+      {/* Add more sections as needed, e.g. "The new Method," "Our Aim," etc. */}
     </div>
   )
 }
