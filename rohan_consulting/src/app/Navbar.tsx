@@ -1,42 +1,56 @@
+// src/app/components/Navbar.tsx
 'use client'
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { FiMenu, FiX } from 'react-icons/fi'
+import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi'
 import { motion } from 'framer-motion'
+import { useTheme } from 'next-themes'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
+
+  // We can check whether we’re in dark mode or not
+  const isDark = theme === 'dark'
 
   return (
-    // Animate the entire nav container
     <motion.nav
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-white shadow"
+      className="sticky top-0 z-50 flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 shadow"
     >
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo or brand name */}
-        <Link href="/" className="text-2xl font-bold text-indigo-600">
-          MyShop
-        </Link>
+      {/* Left: Brand Name */}
+      <Link
+        href="/"
+        className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent"
+      >
+        MyShop
+      </Link>
 
-        {/* Hamburger Menu (mobile) */}
+      {/* Right: Desktop Menu + Theme Toggle */}
+      <div className="hidden md:flex items-center space-x-6">
+        <AnimatedNavLink href="/">Home</AnimatedNavLink>
+        <AnimatedNavLink href="/products">Products</AnimatedNavLink>
+        <AnimatedNavLink href="/contact">Contact</AnimatedNavLink>
+
+        {/* Theme Toggle Icon */}
         <button
-          className="md:hidden text-gray-600"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          className="text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         >
-          {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
         </button>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6">
-          <AnimatedNavLink href="/">Home</AnimatedNavLink>
-          <AnimatedNavLink href="/products">Products</AnimatedNavLink>
-          <AnimatedNavLink href="/contact">Contact</AnimatedNavLink>
-        </div>
       </div>
+
+      {/* Hamburger (mobile) */}
+      <button
+        className="md:hidden text-gray-600 dark:text-gray-300"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+      </button>
 
       {/* Mobile Menu */}
       {isOpen && (
@@ -44,9 +58,9 @@ export default function Navbar() {
           initial={{ height: 0 }}
           animate={{ height: 'auto' }}
           transition={{ duration: 0.3 }}
-          className="md:hidden bg-gray-50 border-t overflow-hidden"
+          className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700"
         >
-          <div className="px-4 py-2 flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 px-4 py-3">
             <AnimatedNavLink href="/" onClick={() => setIsOpen(false)}>
               Home
             </AnimatedNavLink>
@@ -56,6 +70,18 @@ export default function Navbar() {
             <AnimatedNavLink href="/contact" onClick={() => setIsOpen(false)}>
               Contact
             </AnimatedNavLink>
+
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={() => {
+                setTheme(isDark ? 'light' : 'dark')
+                setIsOpen(false)
+              }}
+              className="flex items-center text-gray-600 dark:text-gray-300 p-2 space-x-2 transition-colors"
+            >
+              {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
+              <span>Toggle Theme</span>
+            </button>
           </div>
         </motion.div>
       )}
@@ -63,9 +89,6 @@ export default function Navbar() {
   )
 }
 
-/** 
- * A reusable component for animating nav links 
- */
 function AnimatedNavLink({
   href,
   children,
@@ -76,15 +99,8 @@ function AnimatedNavLink({
   onClick?: () => void
 }) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05, color: '#4F46E5' }} // slightly enlarge & color the link on hover
-      whileTap={{ scale: 0.95 }}
-    >
-      <Link
-        href={href}
-        onClick={onClick}
-        className="hover:text-indigo-600 transition-colors"
-      >
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <Link href={href} onClick={onClick}>
         {children}
       </Link>
     </motion.div>

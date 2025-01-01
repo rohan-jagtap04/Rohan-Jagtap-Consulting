@@ -1,10 +1,12 @@
+// src/app/layout.tsx
 import './globals.css'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { ThemeProvider } from 'next-themes'
 
 export const metadata = {
-  title: 'My Aesthetic E-commerce Portfolio',
-  description: 'A visually stunning e-commerce portfolio site built with Next.js & Tailwind CSS'
+  title: 'My Parallax Scrollytelling E-commerce Site',
+  description: 'An advanced Next.js portfolio site with parallax, scrollytelling, and theme toggles.',
 }
 
 export default function RootLayout({
@@ -14,12 +16,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1 container mx-auto px-4 md:px-8 py-4">
-          {children}
-        </main>
-        <Footer />
+      {/* 
+        Notice: We do NOT force any class on <html> here;
+        next-themes will handle it automatically 
+      */}
+      <body>
+        {/* Provide defaultTheme="system" to sync with user system */}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          {/* We’ll keep the main container as before or with your styling */}
+          <main className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )
