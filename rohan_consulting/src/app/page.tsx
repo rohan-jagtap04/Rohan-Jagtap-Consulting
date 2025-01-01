@@ -65,7 +65,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. Overview Section (light grey) */}
-      <section className="bg-gray-50 dark:bg-neutral-800 py-16 px-6 md:px-12">
+      <section className="relative flex flex-col justify-center min-h-screen bg-gray-50 dark:bg-neutral-800 py-16 px-6 md:px-12">
         <motion.h2
           className="text-2xl md:text-4xl font-semibold mb-6"
           initial={{ opacity: 0, y: 40 }}
@@ -93,7 +93,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. Stay Updated (another block, referencing 3.0) */}
-      <section className="bg-white dark:bg-neutral-900 py-16 px-6 md:px-12">
+      <section className="relative flex flex-col justify-center min-h-screen bg-white dark:bg-neutral-900 py-16 px-6 md:px-12">
         <motion.h2
           className="text-2xl md:text-4xl font-semibold mb-6"
           initial={{ opacity: 0, y: 40 }}
