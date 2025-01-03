@@ -179,7 +179,7 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <p className="text-gray-600 dark:text-gray-300 italic mb-6">
-              "The neural interface technology developed by Augen has revolutionized our research facility's capabilities. The precision and reliability are unprecedented."
+              &quot;The neural interface technology developed by Augen has revolutionized our research facility&apos;s capabilities. The precision and reliability are unprecedented.&quot;
             </p>
             <div className="flex items-center">
               <div>
@@ -197,7 +197,7 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <p className="text-gray-600 dark:text-gray-300 italic mb-6">
-              "Implementing Augen's prosthetic systems has transformed our rehabilitation program. The adaptive learning capabilities are truly groundbreaking."
+              &quot;Implementing Augen&apos;s prosthetic systems has transformed our rehabilitation program. The adaptive learning capabilities are truly groundbreaking.&quot;
             </p>
             <div className="flex items-center">
               <div>
@@ -215,7 +215,7 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <p className="text-gray-600 dark:text-gray-300 italic mb-6">
-              "The integration of Augen's technology has elevated our patient care to new heights. Their commitment to innovation is reshaping the future of medicine."
+              &quot;The integration of Augen&apos;s technology has elevated our patient care to new heights. Their commitment to innovation is reshaping the future of medicine.&quot;
             </p>
             <div className="flex items-center">
               <div>
