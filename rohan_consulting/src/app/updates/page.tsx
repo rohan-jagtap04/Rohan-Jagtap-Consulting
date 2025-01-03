@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 export default function UpdatesPage() {
   return (
-    <section className="min-h-screen bg-neutral-900 text-gray-100 px-6 md:px-12 py-16">
+    <section className="min-h-screen bg-neutral-900 text-gray-100 px-6 md:px-12 pb-16 pt-[200px]">
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

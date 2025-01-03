@@ -15,9 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative min-h-screen bg-white text-gray-900 dark:bg-[#111] dark:text-gray-100">
+      <body className="relative min-h-screen bg-[url('/bg.svg')] text-gray-900 dark:bg-[#111] dark:text-gray-100">
         <Navbar />
-        <main className="pt-[90px]">{children}</main>
+        <main>{children}</main>
         {/* We add padding-top to avoid overlapping the floating nav. */}
         <Footer />
       </body>

@@ -1,7 +1,7 @@
 // app/components/Footer.tsx
 export default function Footer() {
   return (
-    <footer className="mt-16 py-8 px-6 md:px-12 bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 text-sm text-gray-600 dark:text-gray-400">
+    <footer className="py-8 px-6 md:px-12 bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 text-sm text-gray-600 dark:text-gray-400">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between space-y-6 md:space-y-0">
         {/* Left side: brand or disclaimers */}
         <div className="space-y-1">

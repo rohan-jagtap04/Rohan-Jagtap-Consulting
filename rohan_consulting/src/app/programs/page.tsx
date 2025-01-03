@@ -5,7 +5,51 @@ import { motion } from 'framer-motion'
 
 export default function ProgramsPage() {
   return (
-    <section className="min-h-screen bg-neutral-900 text-gray-100 px-6 md:px-12 py-16">
+    
+    <section className="min-h-screen bg-neutral-900 text-gray-100 px-6 md:px-12 pt-[200px] pb-16">
+      <div className="absolute inset-0 overflow-hidden -z-10">
+        <div className="relative w-full h-full">
+          <motion.div
+            className="absolute w-[500px] h-[500px] rounded-full bg-blue-500/20 blur-3xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, 50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          <motion.div
+            className="absolute right-0 w-[400px] h-[400px] rounded-full bg-purple-500/20 blur-3xl"
+            animate={{
+              x: [0, -80, 0],
+              y: [0, 100, 0],
+              scale: [1.2, 1, 1.2],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-0 left-1/2 w-[600px] h-[600px] rounded-full bg-indigo-500/20 blur-3xl"
+            animate={{
+              x: [0, -120, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        </div>
+      </div>
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
